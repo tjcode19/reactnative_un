@@ -60,6 +60,7 @@ const styles = StyleSheet.create({
   appContainer: {
     paddingTop: 50,
     paddingHorizontal: 16,
+    marginTop: 16,
     flex: 1,
   },
 
