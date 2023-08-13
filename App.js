@@ -1,10 +1,6 @@
 import { useState } from "react";
-import {
-  StyleSheet,
-  View,
-  Button,
-  FlatList,
-} from "react-native";
+import { StyleSheet, View, Button, FlatList } from "react-native";
+import { StatusBar } from "expo-status-bar";
 
 import GoalsItem from "./components/GoalsItem";
 import GoalInput from "./components/GoalInput";
@@ -35,24 +31,35 @@ export default function App() {
   }
 
   return (
-    <View style={styles.appContainer}>
-      <Button title="Add Goal" onPress={startAddGoalHandler} />
-      <GoalInput visible={modalGoalVisible} addGoalHandler={addGoalHandler} closeModal={endAddGoalHandler} />
-
-      <View style={styles.goalContainer}>
-        <FlatList
-          data={courseGoals}
-          renderItem={(itemData) => (
-            <GoalsItem
-              text={itemData.item.text}
-              id={itemData.item.id}
-              onDeleteItem={deleteItemHandler}
-            />
-          )}
-          keyExtractor={(item, index) => item.id}
+    <>
+      <StatusBar style="light" />
+      <View style={styles.appContainer}>
+        <Button
+          title="Add Goal"
+          onPress={startAddGoalHandler}
+          color={"#a065ec"}
         />
+        <GoalInput
+          visible={modalGoalVisible}
+          addGoalHandler={addGoalHandler}
+          closeModal={endAddGoalHandler}
+        />
+
+        <View style={styles.goalContainer}>
+          <FlatList
+            data={courseGoals}
+            renderItem={(itemData) => (
+              <GoalsItem
+                text={itemData.item.text}
+                id={itemData.item.id}
+                onDeleteItem={deleteItemHandler}
+              />
+            )}
+            keyExtractor={(item, index) => item.id}
+          />
+        </View>
       </View>
-    </View>
+    </>
   );
 }
 
@@ -60,11 +67,11 @@ const styles = StyleSheet.create({
   appContainer: {
     paddingTop: 50,
     paddingHorizontal: 16,
-    marginTop: 16,
     flex: 1,
   },
 
   goalContainer: {
     flex: 6,
+    marginTop: 26,
   },
 });
